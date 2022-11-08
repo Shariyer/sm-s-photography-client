@@ -1,11 +1,16 @@
 /** @format */
 
 import React from "react";
+import About from "../About/About";
+import Contact from "../Contact/Contact";
+import Banner from "./Banner/Banner";
 
 const Home = () => {
   return (
     <div>
-      <h3>this is home</h3>
+      <Banner></Banner>
+      <About />
+      <Contact />
     </div>
   );
 };

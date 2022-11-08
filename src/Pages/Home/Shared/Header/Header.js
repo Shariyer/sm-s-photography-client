@@ -4,6 +4,7 @@ import React from "react";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { authContext } from "../../../../Context/ContextProvider/ContextProvider";
+import { FaUser } from "react-icons/fa";
 
 const Header = () => {
   const { user, SignOUT } = useContext(authContext);
@@ -33,14 +34,7 @@ const Header = () => {
           Services
         </Link>
       </li>
-      <li>
-        <Link
-          className="font-semibold text-xl text-black hover:bg-white rounded"
-          to="/myReview"
-        >
-          MyReview
-        </Link>
-      </li>
+
       <li>
         <Link
           className="font-semibold text-xl text-black hover:bg-white rounded "
@@ -76,12 +70,26 @@ const Header = () => {
       </li>
       <li>
         {user?.uid ? (
-          <p
-            onClick={handleSignOut}
-            className=" btn btn-outline font-semibold ml-5"
-          >
-            LogOut
-          </p>
+          <>
+            <Link
+              className="font-semibold text-xl text-black hover:bg-white rounded"
+              to="/myReview"
+            >
+              MyReview
+            </Link>
+            <Link
+              className="font-semibold text-xl text-black hover:bg-white rounded"
+              to="/addService"
+            >
+              Add Service
+            </Link>
+            <p
+              onClick={handleSignOut}
+              className=" btn btn-outline font-semibold ml-5"
+            >
+              LogOut
+            </p>
+          </>
         ) : (
           <Link className="btn btn-outline font-semibold" to="/login">
             Login
@@ -129,9 +137,15 @@ const Header = () => {
         <ul className="menu menu-horizontal p-0">{menuItems}</ul>
       </div>
       <div className="navbar-end">
-        {/* <Link className="">
-          <button className="btn btn-outline btn-warning">Appointment</button>
-        </Link> */}
+        <div className="w-10 rounded-full">
+          {user?.email ? (
+            <img className="rounded-full" src={user?.photoURL} alt="" />
+          ) : (
+            <p className="text-4xl   ">
+              <FaUser />
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );

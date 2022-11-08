@@ -43,7 +43,7 @@ const Login = () => {
   };
 
   return (
-    <div className="hero my-20">
+    <div className="hero mt-4 bg-gradient-to-r from-indigo-200 via-purple-700 to-slate-600">
       <div className="hero-content flex-col  lg:flex-row  bg-gradient-to-r from-indigo-200 via-purple-700 to-slate-600 rounded-2xl">
         <div>
           <img className="rounded-2xl" src={loginCover} alt="" />
@@ -94,7 +94,10 @@ const Login = () => {
           </form>
           <p className="text-center py-2">
             New to S.M.'s Snap??{" "}
-            <Link className="underline text-orange-600 font-bold" to="/signup">
+            <Link
+              className="underline text-orange-600 font-bold"
+              to="/register"
+            >
               Sign Up
             </Link>
           </p>

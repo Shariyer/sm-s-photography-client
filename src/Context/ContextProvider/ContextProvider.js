@@ -8,6 +8,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import app from "../../Firebase/Firebase/firebase.config";
 
@@ -43,6 +44,11 @@ const ContextProvider = ({ children }) => {
 
     return signInWithPopup(auth, googleProvider);
   };
+  //  Updating user profile
+  const UpdateUserProfile = () => {
+    setLoading(true);
+    return updateProfile(auth.currentUser);
+  };
 
   // observer (on change of auth of user)
   useEffect(() => {
@@ -57,7 +63,15 @@ const ContextProvider = ({ children }) => {
   }, []);
 
   // sharing information
-  const authInfo = { user, loading, EPSignUp, EPLogin, SignOUT, SignInWithG };
+  const authInfo = {
+    user,
+    loading,
+    EPSignUp,
+    EPLogin,
+    SignOUT,
+    SignInWithG,
+    UpdateUserProfile,
+  };
   return (
     <authContext.Provider value={authInfo}>{children}</authContext.Provider>
   );
