@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 const Service = ({ data }) => {
   const { img, title, price, description, service_id, _id } = data;
 
-  console.log(img);
   return (
     <div className="relative flex flex-col items-center py-5 shadow-2xl rounded-2xl w-9/12 mx-auto ">
       <figure>
