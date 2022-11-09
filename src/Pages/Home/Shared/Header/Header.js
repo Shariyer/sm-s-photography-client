@@ -79,7 +79,7 @@ const Header = () => {
             </Link>
             <Link
               className="font-semibold text-xl text-black hover:bg-white rounded"
-              to="/addService"
+              to="/add/service"
             >
               Add Service
             </Link>

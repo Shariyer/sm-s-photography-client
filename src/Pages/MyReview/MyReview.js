@@ -12,7 +12,6 @@ const MyReview = () => {
     fetch(`http://localhost:5000/reviews?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setMyReview(data);
       })
       .catch((err) => console.log(err));

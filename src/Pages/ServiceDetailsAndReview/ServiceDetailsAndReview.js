@@ -1,19 +1,20 @@
 /** @format */
 
 import React, { useContext, useEffect, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { authContext } from "../../Context/ContextProvider/ContextProvider";
 import Review from "./Review/Review";
 
 const ServiceDetailsAndReview = () => {
   const service = useLoaderData();
+  const navigate = useNavigate();
   const { user } = useContext(authContext);
 
   //state for reviews
   const [reviews, setReviews] = useState([]);
 
   // console.log(user);
-  const { _id, img, title, description, price } = service[0];
+  const { img, title, description, price } = service[0];
 
   // getting all reviews from database
   useEffect(() => {
@@ -28,6 +29,28 @@ const ServiceDetailsAndReview = () => {
     const form = event.target;
     const reviewText = form.review.value;
     console.log(reviewText);
+    const review = {
+      title: title,
+      photoURL: user?.photoURL,
+      reviewText: reviewText,
+      email: user?.email,
+      name: user?.displayName,
+    };
+    fetch("http://localhost:5000/reviews", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(review),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          alert("Your review added");
+          form.reset();
+          navigate("/myReview");
+        }
+      });
   };
 
   return (
