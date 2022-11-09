@@ -20,9 +20,9 @@ const HomeServices = ({ data }) => {
           {description.slice(0, 100) + "...Read More"}
         </p>
         <div className="flex justify-center ">
-          {/* <button className="btn btn-primary absolute bottom-3">
-            <Link to={`service/${_id}`}>See Details</Link>
-          </button> */}
+          <button className="btn btn-primary absolute bottom-3">
+            <Link to={`services/service/${_id}`}>See Details</Link>
+          </button>
         </div>
       </div>
     </div>

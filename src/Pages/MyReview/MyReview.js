@@ -63,9 +63,7 @@ const MyReview = () => {
   };
   return (
     <div>
-      <h2 className="text-4xl text-center font-bold mt-5">
-        Your Comments are:
-      </h2>
+      <h2 className="text-4xl text-center font-bold mt-5">Your Reviews are:</h2>
       <div className="bg-white rounded-xl my-5 ">
         {myReviews.map((comment) => (
           <Comment
@@ -76,6 +74,11 @@ const MyReview = () => {
           ></Comment>
         ))}
       </div>
+      {myReviews?.length === 0 && (
+        <h1 className="text-center text-5xl my-5 font-bold text-red-500">
+          You have not Reviewed yet!!
+        </h1>
+      )}
     </div>
   );
 };

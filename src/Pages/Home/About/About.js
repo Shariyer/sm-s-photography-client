@@ -41,7 +41,7 @@ const About = () => {
               <img src={ownerPhoto1} alt="" className=" h-96 rounded-lg  " />
             </div>
             <div className="w-1/2  mx-3 border p-3 rounded-2xl">
-              <h1 className="text-4xl font-extrabold">
+              <h1 className="text-3xl font-bold text-black p-2 text-center">
                 I have a team of superbly talented <br />
                 <br /> young fellows who are workaholic <br />
                 <br /> Always find a way to complete the work with

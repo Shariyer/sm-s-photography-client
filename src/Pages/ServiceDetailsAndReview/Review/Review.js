@@ -11,8 +11,8 @@ const Review = ({ review }) => {
         <img className="w-full" src={photoURL} alt="" />
       </div>
       <div className=" px-20">
-        <h3 className="text-start text-black">Name:{name}</h3>
-        <p className="text-start text-black">comment:{reviewText}</p>
+        <h3 className="text-start text-white font-bold">Name:{name}</h3>
+        <p className="text-start text-white font-bold">Review:{reviewText}</p>
       </div>
     </div>
   );
