@@ -45,9 +45,9 @@ const ContextProvider = ({ children }) => {
     return signInWithPopup(auth, googleProvider);
   };
   //  Updating user profile
-  const UpdateUserProfile = () => {
+  const UpdateUserProfile = (profile) => {
     setLoading(true);
-    return updateProfile(auth.currentUser);
+    return updateProfile(auth.currentUser, profile);
   };
 
   // observer (on change of auth of user)

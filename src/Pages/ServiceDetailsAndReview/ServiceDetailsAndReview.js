@@ -1,14 +1,27 @@
 /** @format */
 
-import React, { useContext } from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { useLoaderData } from "react-router-dom";
 import { authContext } from "../../Context/ContextProvider/ContextProvider";
+import Review from "./Review/Review";
 
 const ServiceDetailsAndReview = () => {
   const service = useLoaderData();
   const { user } = useContext(authContext);
+
+  //state for reviews
+  const [reviews, setReviews] = useState([]);
+
   // console.log(user);
   const { _id, img, title, description, price } = service[0];
+
+  // getting all reviews from database
+  useEffect(() => {
+    fetch(`http://localhost:5000/reviews?title=${title}`)
+      .then((res) => res.json())
+      .then((data) => setReviews(data))
+      .catch((err) => console.log(err));
+  }, [title]);
   // handle Review form
   const handleReview = (event) => {
     event.preventDefault();
@@ -34,12 +47,18 @@ const ServiceDetailsAndReview = () => {
         </div>
       </div>
       <div className="w-1/2">
-        <h2 className="text-4xl font-bold text-center">
+        <h2 className="text-4xl font-bold text-center mt-10">
           Review of this Service{" "}
         </h2>
-        {/* {
-                  
-              } */}
+
+        {reviews.map((review) => (
+          <Review key={review._id} review={review}></Review>
+        ))}
+        {reviews?.length === 0 && (
+          <h2 className="text-center font-bold text-4xl text-success mt-4">
+            No Reviews yet
+          </h2>
+        )}
 
         <div className="flex justify-center items-center mt-10">
           <form

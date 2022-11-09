@@ -17,26 +17,28 @@ const Register = () => {
     const password = form.password.value;
     console.log("given" + name, email, password, url);
 
-    UpdateUserProfile({
-      displayName: name,
-      photoURL: url,
-    })
-      .then(() => {
-        alert("profile updated");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
     //Sign up with email and password
     EPSignUp(email, password)
       .then((result) => {
         const user = result.user;
         form.reset();
+        handleUpdateUserProfile(name, url);
         navigate("/services");
         console.log("User created EP:", user);
       })
       .catch((err) => console.log(err.message));
+
+    // updating user profile name and photoUrl
+    const handleUpdateUserProfile = (name, url) => {
+      const profile = {
+        displayName: name,
+        photoURL: url,
+      };
+
+      UpdateUserProfile(profile).catch((error) => {
+        console.log(error);
+      });
+    };
   };
   return (
     <div className="hero py-20 bg-gradient-to-r from-base-200 via-purple-700 to-slate-00">

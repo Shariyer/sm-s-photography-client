@@ -138,7 +138,7 @@ const Header = () => {
       </div>
       <div className="navbar-end">
         <div className="w-10 rounded-full">
-          {user?.email ? (
+          {user?.photoURL ? (
             <img className="rounded-full" src={user?.photoURL} alt="" />
           ) : (
             <p className="text-4xl   ">

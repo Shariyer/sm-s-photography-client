@@ -2,15 +2,18 @@
 
 import React from "react";
 
-const Review = () => {
+const Review = ({ review }) => {
+  const { photoURL, reviewText, name, title } = review;
+  console.log("inside review", review);
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex items-center bg-purple-500 rounded-xl my-5 mx-10">
       <div>
-        <img src="" alt="" />
+        <img className="w-full" src={photoURL} alt="" />
       </div>
-      <div>
-        <h3>Name:</h3>
-        <p>comment:</p>
+      <div className=" px-20">
+        <h3 className="text-start text-black">{title}</h3>
+        <h3 className="text-start text-black">Name:{name}</h3>
+        <p className="text-start text-black">comment:{reviewText}</p>
       </div>
     </div>
   );
