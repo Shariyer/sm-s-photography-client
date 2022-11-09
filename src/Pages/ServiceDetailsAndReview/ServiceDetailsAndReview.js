@@ -99,6 +99,7 @@ const ServiceDetailsAndReview = () => {
                 name="review"
                 placeholder="Type Your Review"
                 className="input input-bordered  py-10 px-20"
+                required
               />
             </label>
             <input
