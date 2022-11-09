@@ -2,8 +2,10 @@
 import React from "react";
 import { FaFacebook, FaWhatsapp, FaTwitter, FaInstagram } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import useTitle from "../../../Hooks/useTitle";
 
 const Contact = () => {
+  useTitle("Contact");
   return (
     <div className="hero min-h-screen  bg-gradient-to-r from-indigo-900 via-purple-700 to-slate-900">
       <div className="hero-content flex-col lg:justify-between lg:flex-row">

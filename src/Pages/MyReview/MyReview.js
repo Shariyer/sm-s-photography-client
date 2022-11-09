@@ -3,9 +3,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { authContext } from "../../Context/ContextProvider/ContextProvider";
+import useTitle from "../../Hooks/useTitle";
 import Comment from "./Comment/Comment";
 
 const MyReview = () => {
+  useTitle("Reviews");
   const navigate = useNavigate();
   const { user } = useContext(authContext);
   const [myReviews, setMyReview] = useState([]);

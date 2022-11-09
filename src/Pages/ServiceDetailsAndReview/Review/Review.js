@@ -3,7 +3,7 @@
 import React from "react";
 
 const Review = ({ review }) => {
-  const { photoURL, reviewText, name, title } = review;
+  const { photoURL, reviewText, name } = review;
   console.log("inside review", review);
   return (
     <div className="flex items-center bg-purple-500 rounded-xl my-5 mx-10">

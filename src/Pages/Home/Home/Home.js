@@ -1,12 +1,14 @@
 /** @format */
 
 import React, { useEffect, useState } from "react";
+import useTitle from "../../../Hooks/useTitle";
 import About from "../About/About";
 import Contact from "../Contact/Contact";
 import Banner from "./Banner/Banner";
 import HomeServices from "./HomeServices/HomeServices";
 
 const Home = () => {
+  useTitle("Home");
   const [services, setServices] = useState([]);
   useEffect(() => {
     fetch("http://localhost:5000/home/services")

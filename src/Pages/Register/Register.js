@@ -4,8 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 import registerCover from "../../assets/RegisterImage/registerCover.jpg";
 import loginImg from "../../assets/LoginImage/loginPic.jpeg";
 import { authContext } from "../../Context/ContextProvider/ContextProvider";
+import useTitle from "../../Hooks/useTitle";
 
 const Register = () => {
+  useTitle("Register");
   const navigate = useNavigate();
   const { EPSignUp, UpdateUserProfile } = useContext(authContext);
   const handleSignUp = (event) => {

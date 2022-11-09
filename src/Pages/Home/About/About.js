@@ -2,8 +2,10 @@
 import React from "react";
 import ownerPhoto1 from "../../../assets/OwnerPhoto/ownerPhoto-1.jpg";
 import ownerPhoto2 from "../../../assets/OwnerPhoto/ownerPhoto-2.jpeg";
+import useTitle from "../../../Hooks/useTitle";
 
 const About = () => {
+  useTitle("About");
   return (
     <div className=" bg-gradient-to-r from-indigo-200 via-purple-700 to-slate-600">
       <h3 className="text-7xl text-center font-extrabold text-warning mt-5">

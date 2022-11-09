@@ -2,8 +2,10 @@
 
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import useTitle from "../../Hooks/useTitle";
 
 const AddService = () => {
+  useTitle("Add Service");
   const navigate = useNavigate();
 
   const handleAddService = (event) => {

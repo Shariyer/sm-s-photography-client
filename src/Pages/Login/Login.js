@@ -8,8 +8,10 @@ import { FcGoogle } from "react-icons/fc";
 import loginImg from "../../assets/LoginImage/loginPic.jpeg";
 import loginCover from "../../assets/LoginImage/loginCover.jpg";
 import { authContext } from "../../Context/ContextProvider/ContextProvider";
+import useTitle from "../../Hooks/useTitle";
 
 const Login = () => {
+  useTitle("Login");
   const navigate = useNavigate();
   const location = useLocation();
 
