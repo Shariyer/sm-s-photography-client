@@ -1,9 +1,9 @@
 /** @format */
 
-import { comment } from "postcss";
 import React from "react";
 import { FaEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
 const Comment = ({ myReview, handleDeleteComment, handleUpdateComment }) => {
   const { _id, title, reviewText } = myReview;
@@ -15,15 +15,18 @@ const Comment = ({ myReview, handleDeleteComment, handleUpdateComment }) => {
         comment : {reviewText}
       </p>
       <div className="flex">
-        <button
-          className="flex justify-center items-center text-xl bg-green-800 px-10 mr-3 rounded-xl py-2 font-bold text-white shadow-xl "
-          onClick={() => handleUpdateComment(_id)}
-        >
-          <h3>
-            <FaEdit />
-          </h3>
-          <h2>Edit</h2>
-        </button>
+        <Link>
+          <button
+            className="flex justify-center items-center text-xl bg-green-800 px-10 mr-3 rounded-xl py-2 font-bold text-white shadow-xl "
+            onClick={() => handleUpdateComment(_id)}
+          >
+            <h3>
+              <FaEdit />
+            </h3>
+            <h2>Edit</h2>
+          </button>
+        </Link>
+
         <button
           className="flex justify-center items-center text-xl bg-red-700 px-5 rounded-xl py-2 font-bold text-white shadow-xl "
           onClick={() => handleDeleteComment(_id)}

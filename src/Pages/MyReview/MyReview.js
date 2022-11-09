@@ -17,32 +17,47 @@ const MyReview = () => {
         setMyReview(data);
       })
       .catch((err) => console.log(err));
-  }, [user?.email]);
+  }, [user?.email, myReviews?.reviewText]);
   const handleUpdateComment = (id) => {
-    fetch("http://localhost:5000/reviews", {
-      method: "PATCH",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.modifiedCount > 0) {
-          alert("your review has been Edited");
-          navigate("/myReview");
-        }
-      });
+    const confirmation = window.confirm("Do you want to Edit your comment??");
+    if (confirmation) {
+      const updatedReviewText = prompt("Write your comment");
+      const data = {
+        updatedReviewText,
+      };
+
+      fetch(`http://localhost:5000/reviews/${id}`, {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.modifiedCount > 0) {
+            alert("your review has been Edited");
+            navigate("/myReview");
+          }
+        });
+    }
   };
   const handleDeleteComment = (id) => {
-    fetch(`http://localhost:5000/reviews/${id}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.deletedCount > 0) {
-          alert("Your review has been Deleted");
-          const remaining = myReviews.filter((rw) => rw._id !== id);
-          setMyReview(remaining);
-        }
+    const confirmation = window.confirm("Do you want to delete your review");
+    if (confirmation) {
+      fetch(`http://localhost:5000/reviews/${id}`, {
+        method: "DELETE",
       })
-      .catch((err) => console.log(err));
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.deletedCount > 0) {
+            alert("Your review has been Deleted");
+            const remaining = myReviews.filter((rw) => rw._id !== id);
+            setMyReview(remaining);
+          }
+        })
+        .catch((err) => console.log(err));
+    }
   };
   return (
     <div>
