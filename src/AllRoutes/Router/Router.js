@@ -66,7 +66,9 @@ const router = createBrowserRouter([
       {
         path: "/services/service/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/services/service/${params.id}`),
+          fetch(
+            `https://b6a11-service-review-server-side-shariyer.vercel.app/services/service/${params.id}`
+          ),
         element: (
           <PrivateRouter>
             <ServiceDetailsAndReview />

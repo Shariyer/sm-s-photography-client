@@ -11,7 +11,9 @@ const Services = () => {
 
   // fetching services from api
   useEffect(() => {
-    fetch("http://localhost:5000/services")
+    fetch(
+      "https://b6a11-service-review-server-side-shariyer.vercel.app/services"
+    )
       .then((res) => res.json())
       .then((data) => setServices(data))
       .catch((err) => console.log(err));

@@ -26,11 +26,14 @@ const ServiceDetailsAndReview = () => {
   const date = new Date();
   // getting all reviews of specific service from database
   useEffect(() => {
-    fetch(`http://localhost:5000/reviews?title=${title}`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("smDB-token")}`,
-      },
-    })
+    fetch(
+      `https://b6a11-service-review-server-side-shariyer.vercel.app/reviews?title=${title}`,
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("smDB-token")}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => setReviews(data))
       .catch((err) => console.log(err));
@@ -50,14 +53,17 @@ const ServiceDetailsAndReview = () => {
       date: date,
     };
     //    add review post
-    fetch("http://localhost:5000/reviews", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${localStorage.getItem("smDB-token")}`,
-      },
-      body: JSON.stringify(review),
-    })
+    fetch(
+      "https://b6a11-service-review-server-side-shariyer.vercel.app/reviews",
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("smDB-token")}`,
+        },
+        body: JSON.stringify(review),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {

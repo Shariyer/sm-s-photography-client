@@ -19,11 +19,14 @@ const MyReview = () => {
   const [myReviews, setMyReview] = useState([]);
   // getting given reviews from database for user
   useEffect(() => {
-    fetch(`http://localhost:5000/reviews?email=${user?.email}`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("smDB-token")}`,
-      },
-    })
+    fetch(
+      `https://b6a11-service-review-server-side-shariyer.vercel.app/reviews?email=${user?.email}`,
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("smDB-token")}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         setMyReview(data);
@@ -38,14 +41,17 @@ const MyReview = () => {
         updatedReviewText,
       };
 
-      fetch(`http://localhost:5000/reviews/${id}`, {
-        method: "PATCH",
-        headers: {
-          "content-type": "application/json",
-          authorization: `Bearer ${localStorage.getItem("smDB-token")}`,
-        },
-        body: JSON.stringify(data),
-      })
+      fetch(
+        `https://b6a11-service-review-server-side-shariyer.vercel.app/reviews/${id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${localStorage.getItem("smDB-token")}`,
+          },
+          body: JSON.stringify(data),
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.modifiedCount > 0) {
@@ -61,12 +67,15 @@ const MyReview = () => {
   const handleDeleteComment = (id) => {
     const confirmation = window.confirm("Do you want to delete your review");
     if (confirmation) {
-      fetch(`http://localhost:5000/reviews/${id}`, {
-        method: "DELETE",
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("smDB-token")}`,
-        },
-      })
+      fetch(
+        `https://b6a11-service-review-server-side-shariyer.vercel.app/reviews/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("smDB-token")}`,
+          },
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.deletedCount > 0) {
