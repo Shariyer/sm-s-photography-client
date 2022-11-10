@@ -4,11 +4,12 @@ import React from "react";
 import { FaEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
 const Comment = ({ myReview, handleDeleteComment, handleUpdateComment }) => {
   const { _id, title, reviewText } = myReview;
   return (
-    <div className="flex justify-between py-7 items-center  px-4">
+    <div className="flex justify-between py-7 items-center shadow-2xl rounded-2xl  px-4 bg-gradient-to-r from-indigo-800 via-purple-700 to-slate-200 mb-2">
       <h3 className="text-2xl font-bold text-black ">Service Name :{title}</h3>
 
       <p className="text-2xl font-bold text-black text-center ">
@@ -36,6 +37,8 @@ const Comment = ({ myReview, handleDeleteComment, handleUpdateComment }) => {
           </h3>
           <h2>Delete</h2>
         </button>
+
+        <Toaster />
       </div>
     </div>
   );

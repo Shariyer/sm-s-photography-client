@@ -3,6 +3,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import useTitle from "../../Hooks/useTitle";
+import toast, { Toaster } from "react-hot-toast";
+
+const notifyServiceAdd = () => {
+  toast.success("Service successfully Added");
+};
 
 const AddService = () => {
   useTitle("Add Service");
@@ -15,11 +20,13 @@ const AddService = () => {
     const img = form.imgUrl.value;
     const price = form.price.value;
     const description = form.description.value;
+    const date = new Date();
     const service = {
       title: title,
       img: img,
       price: price,
       description: description,
+      date: date,
     };
     fetch("http://localhost:5000/services", {
       method: "POST",
@@ -31,12 +38,13 @@ const AddService = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {
-          alert("service added");
+          toast.success("Your service added successfully");
           form.reset();
           navigate("/services");
         }
       })
       .catch((err) => console.log(err));
+    notifyServiceAdd();
   };
   return (
     <div className="bg-gradient-to-r from-indigo-900 via-purple-700 to-slate-900 ">
@@ -99,6 +107,7 @@ const AddService = () => {
             type="submit"
             value="ADD"
           />
+          <Toaster></Toaster>
         </div>
       </form>
     </div>

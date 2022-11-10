@@ -2,14 +2,20 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
+import { PhotoProvider, PhotoView } from "react-photo-view";
+import "react-photo-view/dist/react-photo-view.css";
 
 const Service = ({ data }) => {
-  const { img, title, price, description, service_id, _id } = data;
+  const { img, title, price, description, _id } = data;
 
   return (
     <div className="relative flex flex-col items-center py-5 shadow-2xl rounded-2xl w-9/12 mx-auto ">
       <figure>
-        <img className="w-56 h-92 rounded-3xl" src={img} alt="" />
+        <PhotoProvider>
+          <PhotoView src={img}>
+            <img className="w-56 h-92 rounded-3xl" src={img} alt="" />
+          </PhotoView>
+        </PhotoProvider>
       </figure>
       <div className=" my-16 w-9/12 mx-auto">
         <div className="flex justify-between items-center">

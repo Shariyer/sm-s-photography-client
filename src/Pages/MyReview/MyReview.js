@@ -5,6 +5,12 @@ import { useNavigate } from "react-router-dom";
 import { authContext } from "../../Context/ContextProvider/ContextProvider";
 import useTitle from "../../Hooks/useTitle";
 import Comment from "./Comment/Comment";
+import toast from "react-hot-toast";
+
+const notifyEdit = () => toast.success("Your review has been Edited");
+const notifyDelete = () => {
+  toast.success("Your review has been Deleted Successfully");
+};
 
 const MyReview = () => {
   useTitle("Reviews");
@@ -43,10 +49,13 @@ const MyReview = () => {
         .then((res) => res.json())
         .then((data) => {
           if (data.modifiedCount > 0) {
-            alert("your review has been Edited");
+            notifyEdit();
+            // toast.success("Your review has been Edited");
             navigate("/myReview");
           }
-        });
+        })
+        .catch((err) => console.log(err));
+      notifyEdit();
     }
   };
   const handleDeleteComment = (id) => {
@@ -61,17 +70,21 @@ const MyReview = () => {
         .then((res) => res.json())
         .then((data) => {
           if (data.deletedCount > 0) {
-            alert("Your review has been Deleted");
+            notifyDelete();
+            // toast.success("Your review has been Deleted Successfully");
             const remaining = myReviews.filter((rw) => rw._id !== id);
             setMyReview(remaining);
           }
         })
         .catch((err) => console.log(err));
+      notifyDelete();
     }
   };
   return (
-    <div>
-      <h2 className="text-4xl text-center font-bold mt-5">Your Reviews are:</h2>
+    <div className="bg-gradient-to-r pb-5 from-indigo-500 via-purple-700 to-slate-600">
+      <h2 className="text-4xl text-center font-bold mt-5 text-white">
+        Your Reviews are:
+      </h2>
       <div className="bg-white rounded-xl my-5 ">
         {myReviews.map((comment) => (
           <Comment

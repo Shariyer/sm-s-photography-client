@@ -5,12 +5,17 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import { authContext } from "../../Context/ContextProvider/ContextProvider";
 import useTitle from "../../Hooks/useTitle";
 import Review from "./Review/Review";
+import toast, { Toaster } from "react-hot-toast";
+
+const notifyAdd = () => {
+  toast.success("added successfully");
+};
 
 const ServiceDetailsAndReview = () => {
   useTitle("Service Details");
   const service = useLoaderData();
   const navigate = useNavigate();
-  const { user, SignOUT } = useContext(authContext);
+  const { user } = useContext(authContext);
 
   //state for reviews
   const [reviews, setReviews] = useState([]);
@@ -56,11 +61,12 @@ const ServiceDetailsAndReview = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {
-          alert("Your review added");
           form.reset();
           navigate("/myReview");
         }
-      });
+      })
+      .catch((err) => console.log(err));
+    notifyAdd();
   };
 
   return (
@@ -112,11 +118,14 @@ const ServiceDetailsAndReview = () => {
                 required
               />
             </label>
-            <input
-              type="submit"
-              className="btn btn-outline btn-purple-900 font-bold text-xl text-black"
-              value="ADD"
-            />
+            <div className="flex justify-center">
+              <input
+                type="submit"
+                className="btn btn-outline btn-purple-900 font-bold text-xl text-black"
+                value="ADD"
+              />
+              <Toaster></Toaster>
+            </div>
           </form>
         </div>
       </div>
