@@ -9,6 +9,7 @@ import loginImg from "../../assets/LoginImage/loginPic.jpeg";
 import loginCover from "../../assets/LoginImage/loginCover.jpg";
 import { authContext } from "../../Context/ContextProvider/ContextProvider";
 import useTitle from "../../Hooks/useTitle";
+import { setAuthToken } from "../../JWTapi/auth";
 
 const Login = () => {
   useTitle("Login");
@@ -18,6 +19,7 @@ const Login = () => {
   const from = location.state?.from?.pathname || "/";
 
   const { EPLogin, SignInWithG } = useContext(authContext);
+
   const handleLogin = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -29,8 +31,11 @@ const Login = () => {
     EPLogin(email, password)
       .then((result) => {
         const user = result.user;
+
+        console.log("Logged in user EP", user);
+        setAuthToken(user);
+
         navigate(from, { replace: true });
-        console.log("Logged in user EP" + user);
       })
       .catch((err) => console.log(err.massage));
   };
@@ -40,12 +45,17 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log("Logged in with google", user);
+        setAuthToken(user);
+        navigate(from, { replace: true });
       })
       .catch((err) => console.log(err.message));
   };
 
   return (
     <div className="hero mt-4 bg-gradient-to-r from-indigo-200 via-purple-700 to-slate-600">
+      {/* {loading === true && (
+        <button className="btn btn-square loading p-10"></button>
+      )} */}
       <div className="hero-content flex-col  lg:flex-row  bg-gradient-to-r from-indigo-200 via-purple-700 to-slate-600 rounded-2xl">
         <div>
           <img className="rounded-2xl" src={loginCover} alt="" />

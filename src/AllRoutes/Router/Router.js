@@ -69,7 +69,6 @@ const router = createBrowserRouter([
           fetch(`http://localhost:5000/services/service/${params.id}`),
         element: (
           <PrivateRouter>
-            {" "}
             <ServiceDetailsAndReview />
           </PrivateRouter>
         ),

@@ -1,13 +1,18 @@
 /** @format */
 import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import registerCover from "../../assets/RegisterImage/registerCover.jpg";
 import loginImg from "../../assets/LoginImage/loginPic.jpeg";
 import { authContext } from "../../Context/ContextProvider/ContextProvider";
 import useTitle from "../../Hooks/useTitle";
+import { setAuthToken } from "../../JWTapi/auth";
 
 const Register = () => {
   useTitle("Register");
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
+
   const navigate = useNavigate();
   const { EPSignUp, UpdateUserProfile } = useContext(authContext);
   const handleSignUp = (event) => {
@@ -27,6 +32,8 @@ const Register = () => {
         handleUpdateUserProfile(name, url);
         navigate("/services");
         console.log("User created EP:", user);
+        setAuthToken(user);
+        navigate(from, { replace: true });
       })
       .catch((err) => console.log(err.message));
 

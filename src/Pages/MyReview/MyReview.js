@@ -13,7 +13,11 @@ const MyReview = () => {
   const [myReviews, setMyReview] = useState([]);
   // getting given reviews from database for user
   useEffect(() => {
-    fetch(`http://localhost:5000/reviews?email=${user?.email}`)
+    fetch(`http://localhost:5000/reviews?email=${user?.email}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("smDB-token")}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         setMyReview(data);
@@ -32,6 +36,7 @@ const MyReview = () => {
         method: "PATCH",
         headers: {
           "content-type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("smDB-token")}`,
         },
         body: JSON.stringify(data),
       })
@@ -49,6 +54,9 @@ const MyReview = () => {
     if (confirmation) {
       fetch(`http://localhost:5000/reviews/${id}`, {
         method: "DELETE",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("smDB-token")}`,
+        },
       })
         .then((res) => res.json())
         .then((data) => {

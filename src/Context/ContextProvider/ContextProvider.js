@@ -24,29 +24,49 @@ const ContextProvider = ({ children }) => {
   //create user with email and password
   const EPSignUp = (email, password) => {
     setLoading(true);
+    console.log("inside Function epsignup:", loading);
+    if (loading) {
+      return <button className="btn btn-square loading p-10"></button>;
+    }
     return createUserWithEmailAndPassword(auth, email, password);
   };
   // login user with email and password
   const EPLogin = (email, password) => {
     setLoading(true);
+    console.log("inside Function eplogin:", loading);
+    if (loading) {
+      return <button className="btn btn-square loading p-10"></button>;
+    }
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   // all user signOUT
   const SignOUT = () => {
     setLoading(true);
-
+    console.log("inside Function signout:", loading);
+    if (loading) {
+      return <button className="btn btn-square loading p-10"></button>;
+    }
+    localStorage.removeItem("smDB-token");
     return signOut(auth);
   };
   // google login
   const SignInWithG = () => {
     setLoading(true);
+    console.log("inside Function gllesingin:", loading);
+    if (loading) {
+      return <button className="btn btn-square loading p-10"></button>;
+    }
 
     return signInWithPopup(auth, googleProvider);
   };
   //  Updating user profile
   const UpdateUserProfile = (profile) => {
     setLoading(true);
+    console.log("inside Function update:", loading);
+    if (loading) {
+      return <button className="btn btn-square loading p-10"></button>;
+    }
     return updateProfile(auth.currentUser, profile);
   };
 
@@ -56,6 +76,7 @@ const ContextProvider = ({ children }) => {
       console.log("Current user is:", currentUser);
       setUser(currentUser);
       setLoading(false);
+      // console.log("after user created", loading);
     });
     return () => {
       unsubscribe();

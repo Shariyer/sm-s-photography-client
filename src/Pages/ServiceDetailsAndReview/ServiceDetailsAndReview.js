@@ -10,17 +10,22 @@ const ServiceDetailsAndReview = () => {
   useTitle("Service Details");
   const service = useLoaderData();
   const navigate = useNavigate();
-  const { user } = useContext(authContext);
+  const { user, SignOUT } = useContext(authContext);
 
   //state for reviews
   const [reviews, setReviews] = useState([]);
 
   // console.log(user);
   const { img, title, description, price } = service[0];
-
-  // getting all reviews from database
+  // date
+  const date = new Date();
+  // getting all reviews of specific service from database
   useEffect(() => {
-    fetch(`http://localhost:5000/reviews?title=${title}`)
+    fetch(`http://localhost:5000/reviews?title=${title}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("smDB-token")}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => setReviews(data))
       .catch((err) => console.log(err));
@@ -37,11 +42,14 @@ const ServiceDetailsAndReview = () => {
       reviewText: reviewText,
       email: user?.email,
       name: user?.displayName,
+      date: date,
     };
+    //    add review post
     fetch("http://localhost:5000/reviews", {
       method: "POST",
       headers: {
         "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("smDB-token")}`,
       },
       body: JSON.stringify(review),
     })
